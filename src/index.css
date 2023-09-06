@@ -12,3 +12,11 @@ body{
     display: flex;
     flex-direction: column;
 }
+
+div.transaction{
+    border-top: 1px solid gainsboro;
+}  
+
+div.transaction:first-child{
+    border-top:0;
+}
