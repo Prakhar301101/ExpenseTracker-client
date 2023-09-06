@@ -15,7 +15,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 /**Steps
  * Create landing Page(Simple and takes you to Login or Register Page) done
  * Create Login,Register feature done
- * Create Expense Tracker UI 
+ * Create Expense Tracker UI done
  * show expense & add expense(+ve/-ve)
  * 4-5days frontend(1day each)
  * Create Backend 
