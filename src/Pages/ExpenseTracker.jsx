@@ -1,11 +1,27 @@
+import { useEffect, useState } from 'react';
 import Footer from '../Components/Footer';
 import Header from '../Components/Header';
 
 const ExpenseTracker = () => {
+
+  const[info,setInfo]=useState({});
+
+  useEffect(()=>{
+    fetch('http://localhost:3000/profile',{
+      credentials:'include'
+    }).then(response=>{
+      response.json().then(jsonData=>{
+        setInfo(jsonData)
+      })
+    })
+  },[])
+
+    console.log(info)
+
   return (
     <div className="min-h-screen flex flex-col font-Roboto bg-blue-950 text-red-50">
       <Header />
-      <section className="max-w-sm my-8 mx-auto">
+      <section className="max-w-md my-8 mx-auto">
         <h1 className="text-center text-3xl font-bold m-0 text-white">
           Rs400<span>.00</span>
         </h1>

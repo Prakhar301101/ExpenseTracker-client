@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import {  useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const links = [
@@ -13,6 +13,7 @@ const Header = () => {
   const navMenuToggle = () => {
     setToggle((toggle) => !toggle);
   };
+
 
   return (
     <div className="bg-bgpri shadow-md w-full fix top-0 left-0 ">

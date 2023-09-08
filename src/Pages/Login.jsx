@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from 'react-router-dom';
+import { Link,Navigate} from 'react-router-dom';
 import Footer from '../Components/Footer';
 import Header from '../Components/Header';
 
@@ -8,10 +8,26 @@ const Login = () => {
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [redirect,setRedirect] =  useState(false);
+ 
   
-  const loginUser=(e)=>{
+  const loginUser=async (e)=>{
     e.preventDefault();
-    console.log(username,password);
+    const response=await fetch('http://localhost:3000/login',{
+      method:"POST",
+      body:JSON.stringify({username,password}),
+      headers:{"Content-Type":"application/json"},
+      credentials:'include', 
+    });
+    if(response.status==200){
+       setRedirect(true);
+    } else {
+      alert("Invalid Credentials");
+    }
+  }
+
+  if(redirect){
+    return <Navigate to={'/Tracker'}/>
   }
 
   return (

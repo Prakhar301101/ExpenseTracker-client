@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from 'react-router-dom';
+import { Link, } from 'react-router-dom';
 import Footer from '../Components/Footer';
 import Header from '../Components/Header';
 
@@ -7,9 +7,21 @@ const Register = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   
-  const createUser=(e)=>{
+
+  
+  const createUser=async (e)=>{
     e.preventDefault();
-    console.log(username,password)
+    const response=await fetch('http://localhost:3000/register',{
+      method:"POST",
+      body:JSON.stringify({username,password}),
+      headers:{"Content-Type":"application/json"},
+    });
+    if(response.status==200){
+      alert("Registration Successful, Login to continue")
+
+    } else {
+      alert("Registration Failed, try a different username");
+    }
   }
 
   return (
