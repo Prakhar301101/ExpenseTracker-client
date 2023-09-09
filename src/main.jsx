@@ -23,12 +23,11 @@ ReactDOM.createRoot(document.getElementById('root')).render(
  * connect with mongoDB
  * Models and database time reqd 1day
  * APIs for login,register and auth(JWT) time reqd1-2days
- * done till here (Expense model not created)
+ * Added Logout feature and logout api endpoint to set JWT as null
  * create middleware for jwt auth
  * API for adding expense(POST) 1day
  * API to get all expense by user(GET) 1day
  * API for deleting expense (DELETE/POST)
- * API 
  * 4-5 days backend
  * 
  * Project Start 4/9/23
