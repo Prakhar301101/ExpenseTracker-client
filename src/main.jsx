@@ -23,7 +23,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
  * connect with mongoDB
  * Models and database time reqd 1day
  * APIs for login,register and auth(JWT) time reqd1-2days
- * done till here (Expense model not created0
+ * done till here (Expense model not created)
  * create middleware for jwt auth
  * API for adding expense(POST) 1day
  * API to get all expense by user(GET) 1day

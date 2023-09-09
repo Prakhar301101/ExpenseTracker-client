@@ -1,19 +1,27 @@
-import {  useState } from 'react';
+import {  useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { UserContext } from '../UserContext';
 
-const links = [
-  { id: 0, name: 'Home', link: '/' },
-  { id: 1, name: 'Login', link: '/Login' },
-  { id: 2, name: 'Signup', link: '/Register' },
-];
 
 const Header = () => {
+
+  const{userInfo,setUserInfo}=useContext(UserContext);
+
   const [toggle, setToggle] = useState(false);
 
   const navMenuToggle = () => {
     setToggle((toggle) => !toggle);
   };
 
+ 
+
+  const logout=()=>{
+    setUserInfo(null);
+    fetch('http://localhost:3000/logout',{
+      method:'POST',
+      credentials:'include'
+    });
+  }
 
   return (
     <div className="bg-bgpri shadow-md w-full fix top-0 left-0 ">
@@ -31,22 +39,60 @@ const Header = () => {
         >
           <ion-icon name={toggle ? 'close-outline' : 'menu-outline'}></ion-icon>
         </div>
-        <ul
+        {userInfo?<ul
           className={`md:flex md:items-center pb-10 md:pb-0 absolute md:static bg-bgpri z-1 md:z-0 left-0 w-full md:w-auto md:pl-0 pl-8 transition-all duration-600 ease-in-out ${
             toggle ? 'top-20' : 'top-[-490px]'
           } `}
         >
-          {links.map((it) => (
-            <li key={it.id} className="md:ml-8 my-7 md:my-0 text-xl">
+          <li  className="md:ml-8 my-7 md:my-0 text-xl">
               <Link
                 className="text-slate-200 hover:text-gray-400 duration-500"
-                to={it.link}
+                to='/Tracker'
               >
-                {it.name}
+               Welcome, {userInfo.username}
               </Link>
             </li>
-          ))}
-        </ul>
+            <li  className="md:ml-8 my-7 md:my-0 text-xl">
+              <Link
+                className="text-slate-200 hover:text-gray-400 duration-500"
+                to='/'
+                onClick={logout}
+              >
+                Logout
+              </Link>
+            </li>
+          
+        </ul>:<ul
+          className={`md:flex md:items-center pb-10 md:pb-0 absolute md:static bg-bgpri z-1 md:z-0 left-0 w-full md:w-auto md:pl-0 pl-8 transition-all duration-600 ease-in-out ${
+            toggle ? 'top-20' : 'top-[-490px]'
+          } `}
+        >
+          <li  className="md:ml-8 my-7 md:my-0 text-xl">
+              <Link
+                className="text-slate-200 hover:text-gray-400 duration-500"
+                to='/'
+              >
+                Home
+              </Link>
+            </li>
+            <li  className="md:ml-8 my-7 md:my-0 text-xl">
+              <Link
+                className="text-slate-200 hover:text-gray-400 duration-500"
+                to='/Login'
+              >
+                Login
+              </Link>
+            </li>
+            <li  className="md:ml-8 my-7 md:my-0 text-xl">
+              <Link
+                className="text-slate-200 hover:text-gray-400 duration-500"
+                to='/Register'
+              >
+               Signup
+              </Link>
+            </li>
+          
+        </ul>}
       </div>
     </div>
   );

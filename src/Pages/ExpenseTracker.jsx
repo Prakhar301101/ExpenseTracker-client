@@ -1,22 +1,21 @@
-import { useEffect, useState } from 'react';
+import {  useEffect, useContext } from 'react';
 import Footer from '../Components/Footer';
 import Header from '../Components/Header';
+import { UserContext } from '../UserContext';
 
 const ExpenseTracker = () => {
-
-  const[info,setInfo]=useState({});
+  const{setUserInfo}=useContext(UserContext);
 
   useEffect(()=>{
     fetch('http://localhost:3000/profile',{
       credentials:'include'
     }).then(response=>{
       response.json().then(jsonData=>{
-        setInfo(jsonData)
+        setUserInfo(jsonData)
       })
     })
   },[])
 
-    console.log(info)
 
   return (
     <div className="min-h-screen flex flex-col font-Roboto bg-blue-950 text-red-50">
