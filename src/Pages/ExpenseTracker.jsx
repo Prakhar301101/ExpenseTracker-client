@@ -15,20 +15,18 @@ const ExpenseTracker = () => {
   const [loading, setLoading] = useState(true);
   //only onmount
   useEffect(() => {
-    fetch('http://localhost:3000/profile', {
+    fetch('https://expensetracker-svi3.onrender.com/profile', {
       credentials: 'include',
     }).then((response) => {
       response.json().then((jsonData) => {
         setUserInfo(jsonData);
       });
     });
-  
     fetchExp(); 
-  
   }, []);
   
   const fetchExp = () => {
-    fetch('http://localhost:3000/expense', {
+    fetch('https://expensetracker-svi3.onrender.com/expense', {
       method: 'GET',
       credentials: 'include',
     }).then((res) => {
@@ -48,7 +46,7 @@ const ExpenseTracker = () => {
 
   const addExpense = async (e) => {
     e.preventDefault();
-    const response = await fetch('http://localhost:3000/expense', {
+    const response = await fetch('https://expensetracker-svi3.onrender.com/expense', {
       method: 'POST',
       body: JSON.stringify({ expense, datetime, description }),
       headers: { 'Content-Type': 'application/json' },
@@ -60,12 +58,34 @@ const ExpenseTracker = () => {
       setDatetime('');
       setDesciption('');
       fetchExp().then(setBalance(balance+exp) )
-
     } else {
       alert('Failed to add Expense');
     }
   };
 
+  const handleDelete= async (id)=>{
+    //change alert to MUI modal
+    const confirmDel=window.confirm("Are you sure you want to delete this expense?")
+    if(confirmDel){
+      const response= await fetch('https://expensetracker-svi3.onrender.com/expense/'+id,{
+        method:'DELETE',
+        credentials:'include'
+      });
+      if(response.status==200){
+        const updatedExpensedata = expensedata.filter((data) => data._id !== id);
+        setExpenseData(updatedExpensedata);
+        let finalBalance = 0;
+        updatedExpensedata.forEach((expenseItem) => {
+          let exp = parseInt(expenseItem.expense);
+          finalBalance += exp;
+        });
+        setBalance(finalBalance);
+      }
+      else{
+        alert("Failed to delete expense, try again")
+      }
+    }
+  }
  
   return (
     <div className="min-h-screen flex flex-col font-Roboto bg-blue-950 text-red-50">
@@ -143,7 +163,7 @@ const ExpenseTracker = () => {
                       {formatISO9075(new Date(data.datetime))}
                     </div>
                   </div>
-                  <div className="flex items-center cursor-pointer text-2xl">
+                  <div onClick={()=>handleDelete(data._id)} className="flex items-center cursor-pointer text-2xl hover:text-blue-300 duration-500">
                     <ion-icon name="trash"></ion-icon>
                   </div>
                 </div>

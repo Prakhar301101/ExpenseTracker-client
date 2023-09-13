@@ -11,7 +11,7 @@ const Register = () => {
   
   const createUser=async (e)=>{
     e.preventDefault();
-    const response=await fetch('http://localhost:3000/register',{
+    const response=await fetch('https://expensetracker-svi3.onrender.com/register',{
       method:"POST",
       body:JSON.stringify({username,password}),
       headers:{"Content-Type":"application/json"},
@@ -32,14 +32,14 @@ const Register = () => {
           <h1 className="text-3xl text-center p text-slate-800 ">Sign Up</h1>
           <form className="flex flex-col  px-3 py-5" onSubmit={createUser}>
             <input
-              className="my-2 rounded-2xl p-2 text-xl "
+              className="my-2 rounded-lg p-2 text-xl "
               type="text"
               placeholder="Username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
             ></input>
             <input
-              className="my-2 rounded-2xl p-2 text-xl"
+              className="my-2 rounded-lg p-2 text-xl"
               type="password"
               placeholder="Password"
               value={password}
