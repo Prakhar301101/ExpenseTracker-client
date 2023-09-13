@@ -87,6 +87,8 @@ const ExpenseTracker = () => {
     }
   }
  
+
+
   return (
     <div className="min-h-screen flex flex-col font-Roboto bg-blue-950 text-red-50">
       <Header />
@@ -110,9 +112,11 @@ const ExpenseTracker = () => {
           <div className="basic flex gap-3 mb-3">
             <input
               className="w-full bg-transparent text-red-50 border-2 border-solid border-slate-700 py-1 px-2 rounded-md"
-              type="text"
+              type="number"
               placeholder="+200/-200"
               value={expense}
+              max="9999999999"
+              min="-9999999999"
               onChange={(e) => setExpense(e.target.value)}
               required
             />
