@@ -17,7 +17,7 @@ const Header = () => {
 
   const logout=()=>{
     setUserInfo(null);
-    fetch('http://localhost:3000/logout',{
+    fetch('https://expensetracker-svi3.onrender.com/logout',{
       method:'POST',
       credentials:'include'
     });
